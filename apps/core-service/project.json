@@ -1,0 +1,51 @@
+{
+  "name": "core-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core-service/src",
+  "projectType": "application",
+  "prefix": "core-service",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/core-service",
+        "main": "apps/core-service/src/main.ts",
+        "tsconfig": "apps/core-service/tsconfig.app.json",
+        "webpackConfig": "apps/core-service/webpack.config.js"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "core-service:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "core-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/core-service"],
+      "options": {
+        "jestConfig": "apps/core-service/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

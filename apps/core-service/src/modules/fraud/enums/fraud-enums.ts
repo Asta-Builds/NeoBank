@@ -1,0 +1,20 @@
+export enum FraudAlertType {
+  AML_THRESHOLD = 'AML_THRESHOLD',
+  VELOCITY = 'VELOCITY',
+  UNUSUAL_PATTERN = 'UNUSUAL_PATTERN',
+  SANCTION_HIT = 'SANCTION_HIT',
+}
+
+export enum FraudSeverity {
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  CRITICAL = 'CRITICAL',
+}
+
+export enum FraudStatus {
+  OPEN = 'OPEN',
+  UNDER_REVIEW = 'UNDER_REVIEW',
+  RESOLVED = 'RESOLVED',
+  ESCALATED = 'ESCALATED',
+}

@@ -1,8 +1,0 @@
-export declare enum KycStatus {
-    NOT_STARTED = "NOT_STARTED",
-    PENDING = "PENDING",
-    APPROVED = "APPROVED",
-    REJECTED = "REJECTED",
-    REQUIRES_ACTION = "REQUIRES_ACTION",
-    EXPIRED = "EXPIRED"
-}

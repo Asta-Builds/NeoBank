@@ -1,9 +1,0 @@
-export declare enum TransactionStatus {
-    INITIATED = "INITIATED",
-    PENDING = "PENDING",
-    PROCESSING = "PROCESSING",
-    SUCCEEDED = "SUCCEEDED",
-    FAILED = "FAILED",
-    REVERSED = "REVERSED",
-    CANCELLED = "CANCELLED"
-}
