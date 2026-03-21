@@ -13,7 +13,7 @@
         "compiler": "tsc",
         "outputPath": "dist/apps/core-service",
         "main": "apps/core-service/src/main.ts",
-        "tsconfig": "apps/core-service/tsconfig.app.json",
+        "tsConfig": "apps/core-service/tsconfig.app.json",
         "webpackConfig": "apps/core-service/webpack.config.js"
       },
       "configurations": {

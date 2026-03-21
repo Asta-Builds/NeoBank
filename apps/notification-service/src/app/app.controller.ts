@@ -9,22 +9,43 @@ export class AppController {
 
   @Get('health')
   getHealth() {
-    return { status: 'ok', service: 'notification-service' };
+    return this.appService.getHealth();
   }
 
   @EventPattern('transaction.initiated')
-  handleTransactionInitiated(@Payload() data: any) {
-    this.logger.log(`🔔 Event received: transaction.initiated - ${JSON.stringify(data)}`);
-    // Process notification logic here (e.g., send push or email)
+  async handleTransactionInitiated(@Payload() data: any) {
+    this.logger.log(`🔄 Transaction Initiated: ID ${data.transactionId}`);
+    // Optional: Notify user that a transaction has started (Security precaution)
   }
 
   @EventPattern('transaction.succeeded')
-  handleTransactionSucceeded(@Payload() data: any) {
-    this.logger.log(`✅ Event received: transaction.succeeded - ${JSON.stringify(data)}`);
+  async handleTransactionSucceeded(@Payload() data: any) {
+    const { userEmail, userPhone, amount, currency, recipientName } = data;
+    
+    // 1. Send Success Email
+    await this.appService.sendEmail(
+      userEmail,
+      '✅ Transfer Successful — NeoBank',
+      `Dear customer, your transfer of ${amount} ${currency} to ${recipientName} was successful. Reference: ${data.transactionId}`
+    );
+
+    // 2. Send SMS for high-value transactions
+    if (amount >= 1000) {
+      await this.appService.sendSMS(
+        userPhone,
+        `NeoBank: Transfer of ${amount} ${currency} to ${recipientName} successful. Ref: ${data.transactionId}`
+      );
+    }
   }
 
   @EventPattern('transaction.failed')
-  handleTransactionFailed(@Payload() data: any) {
-    this.logger.warn(`❌ Event received: transaction.failed - ${JSON.stringify(data)}`);
+  async handleTransactionFailed(@Payload() data: any) {
+    const { userEmail, amount, currency, error } = data;
+    
+    await this.appService.sendEmail(
+      userEmail,
+      '❌ Transfer Failed — NeoBank',
+      `Dear customer, your transfer of ${amount} ${currency} could not be completed. Reason: ${error || 'System error'}. No funds were debited.`
+    );
   }
 }

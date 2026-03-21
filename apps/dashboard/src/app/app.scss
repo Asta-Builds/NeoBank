@@ -1,0 +1,64 @@
+.dashboard-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f4f7f6;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+
+    h1 {
+      margin: 0;
+      color: #2c3e50;
+    }
+
+    .status-indicator {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      padding: 5px 10px;
+      background-color: #ecf0f1;
+      border-radius: 20px;
+    }
+  }
+
+  .login-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+    h2 {
+      color: #34495e;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #7f8c8d;
+      margin-bottom: 25px;
+    }
+
+    .login-btn {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #27ae60;
+      }
+    }
+  }
+}

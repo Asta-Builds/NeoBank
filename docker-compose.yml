@@ -31,6 +31,79 @@ services:
     volumes:
       - redis-data:/data
 
+  api-gateway:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+      args:
+        APP_NAME: api-gateway
+    container_name: neobank-api-gateway
+    ports:
+      - "8080:4000"
+    environment:
+      - PORT=4000
+      - CORE_SERVICE_URL=http://core-service:3000
+      - NOTIFICATION_SERVICE_URL=http://notification-service:3001
+      - JWT_ACCESS_SECRET=replace-me-with-long-secret
+      - REDIS_URL=redis://redis:6379
+      - ENCRYPTION_KEY=32-character-long-secret-key-123
+      - ENCRYPTION_IV_LENGTH=16
+    depends_on:
+      - redis
+
+  core-service:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+      args:
+        APP_NAME: core-service
+    container_name: neobank-core-service
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=neobank
+      - DB_USER=postgres
+      - DB_PASSWORD=root
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - REDIS_URL=redis://redis:6379
+      - JWT_ACCESS_SECRET=replace-me-with-long-secret
+      - ENCRYPTION_KEY=32-character-long-secret-key-123
+      - ENCRYPTION_IV_LENGTH=16
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+
+  notification-service:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+      args:
+        APP_NAME: notification-service
+    container_name: neobank-notification-service
+    ports:
+      - "3001:3001"
+    environment:
+      - NOTIFICATION_PORT=3001
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - ENCRYPTION_KEY=32-character-long-secret-key-123
+      - ENCRYPTION_IV_LENGTH=16
+    depends_on:
+      - rabbitmq
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/dashboard.Dockerfile
+    container_name: neobank-dashboard
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
+
 volumes:
   postgres-data:
   rabbitmq-data:

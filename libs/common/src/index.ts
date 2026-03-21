@@ -4,6 +4,7 @@ export * from './decorators/roles.decorator';
 export * from './guards/roles.guard';
 export * from './interceptors/audit.interceptor';
 export * from './middleware/raw-body.middleware';
+export * from './strategies/jwt.strategy';
 export * from './utils/crypto.util';
 export * from './enums/role.enum';
 export * from './enums/kyc-status.enum';

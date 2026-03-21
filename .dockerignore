@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.nx
+.vscode
+*.md
+LICENSE
+.gitignore
+.prettierignore
+.prettierrc
+eslint.config.mjs
+jest.config.ts
+jest.preset.js
+package-lock.json

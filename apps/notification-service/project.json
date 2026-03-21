@@ -15,7 +15,8 @@
       "configurations": {
         "development": {
           "args": ["--node-env=development"]
-        }
+        },
+        "production": {}
       }
     },
     "prune-lockfile": {

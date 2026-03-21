@@ -27,16 +27,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Session_Summary_2026-03-20.md",
+                "file": "NeoBank — Frontend Description.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Session_Summary_2026-03-20"
+              "title": "NeoBank — Frontend Description"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -198,14 +197,15 @@
       "bases:Créer une nouvelle base": false
     }
   },
-  "active": "64e1c8991b0164aa",
+  "active": "411bb4d7c5813bdc",
   "lastOpenFiles": [
-    "NeoBank Maroc — SOLID Principles Applied.md",
-    "Session_Summary_2026-03-20.md",
-    "NeoBank Maroc — Microservices Architecture.md",
     "NeoBank — Frontend Description.md",
-    "Microservices_Transition.md",
+    "Realized_Features.md",
     "Session_Summary.md",
+    "Session_Summary_2026-03-20.md",
+    "NeoBank Maroc — SOLID Principles Applied.md",
+    "NeoBank Maroc — Microservices Architecture.md",
+    "Microservices_Transition.md",
     "Product Backlog.md"
   ]
 }

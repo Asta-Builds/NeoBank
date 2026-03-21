@@ -1,0 +1,77 @@
+<div class="min-h-screen bg-bg-base flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="flex justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="20" height="12" x="2" y="9" rx="2"/><path d="M11 13v4"/><path d="M15 13v4"/><path d="M7 13v4"/><path d="M2 9l10-5 10 5"/></svg>
+    </div>
+    <h2 class="mt-6 text-center text-3xl font-display font-bold text-text-primary">
+      Créer votre compte
+    </h2>
+    <p class="mt-2 text-center text-sm text-text-secondary">
+      Ou
+      <a routerLink="/login" class="font-medium text-primary hover:text-primary-dark transition-colors">
+        connectez-vous à votre compte existant
+      </a>
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow-card sm:rounded-lg sm:px-10 border border-border">
+      <form class="space-y-6" (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <div *ngIf="error" class="bg-danger/10 border border-danger text-danger px-4 py-3 rounded-md text-sm">
+          {{ error }}
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-text-secondary">
+            Adresse e-mail
+          </label>
+          <div class="mt-1">
+            <input id="email" name="email" type="email" required [(ngModel)]="registerData.email"
+              class="appearance-none block w-full px-3 py-2 border border-border rounded-sm shadow-sm placeholder-text-secondary focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-medium text-text-secondary">
+            Numéro de téléphone
+          </label>
+          <div class="mt-1">
+            <input id="phone" name="phone" type="tel" required [(ngModel)]="registerData.phone" placeholder="+212600000000"
+              class="appearance-none block w-full px-3 py-2 border border-border rounded-sm shadow-sm placeholder-text-secondary focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-text-secondary">
+            Mot de passe
+          </label>
+          <div class="mt-1">
+            <input id="password" name="password" type="password" required [(ngModel)]="registerData.password"
+              class="appearance-none block w-full px-3 py-2 border border-border rounded-sm shadow-sm placeholder-text-secondary focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" [disabled]="loading || !registerForm.valid"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-all">
+            <span *ngIf="!loading">S'inscrire</span>
+            <span *ngIf="loading">Inscription en cours...</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-border"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-text-secondary uppercase tracking-wider text-[10px] font-bold">
+              Sécurisé par AES-256
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

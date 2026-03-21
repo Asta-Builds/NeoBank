@@ -1,0 +1,230 @@
+<div class="flex h-screen bg-bg-base overflow-hidden">
+  <!-- SIDEBAR -->
+  <aside class="w-72 bg-primary-dark text-white flex flex-col shadow-xl z-20">
+    <div class="p-8 border-b border-white/10">
+      <div class="text-2xl font-display font-bold italic tracking-tight">NeoBank</div>
+    </div>
+    
+    <nav class="flex-grow p-6 space-y-2">
+      <a href="#" class="flex items-center gap-4 px-4 py-3 bg-white/10 rounded-md text-white font-medium transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Aperçu
+      </a>
+      <a href="#" class="flex items-center gap-4 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-md transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        Mes Portefeuilles
+      </a>
+      <a href="#" class="flex items-center gap-4 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-md transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        Transferts
+      </a>
+      <a href="#" class="flex items-center gap-4 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-md transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="19" cy="11" r="3"/></svg>
+        Bénéficiaires
+      </a>
+      <a href="#" class="flex items-center gap-4 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-md transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Mes Cartes
+      </a>
+      <a href="#" class="flex items-center gap-4 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-md transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        Notifications
+      </a>
+    </nav>
+
+    <div class="p-6 border-t border-white/10">
+      <div class="flex items-center gap-3 px-4 py-2 hover:bg-white/5 rounded-md cursor-pointer transition-all">
+        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold text-sm uppercase">
+          {{ user?.email?.substring(0, 2) || 'UN' }}
+        </div>
+        <div>
+          <div class="text-sm font-bold truncate max-w-[140px]">{{ user?.email?.split('@')[0] || 'Utilisateur' }}</div>
+          <div class="text-[10px] text-white/50 uppercase tracking-tighter">{{ user?.role || 'Compte Standard' }}</div>
+        </div>
+      </div>
+      <button (click)="authService.logout()" routerLink="/" class="mt-4 w-full flex items-center justify-center gap-2 text-xs text-white/50 hover:text-white py-2 transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+        Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow flex flex-col overflow-y-auto">
+    <!-- HEADER -->
+    <header class="h-20 bg-white border-b border-border px-8 flex items-center justify-between sticky top-0 z-10">
+      <h1 class="text-xl font-display font-bold text-text-primary flex items-center gap-2">
+        Bonjour, {{ user?.email?.split('@')[0] || 'Utilisateur' }} 
+        <span class="inline-block animate-bounce-slow text-2xl">👋</span>
+      </h1>
+      
+      <div class="flex items-center gap-6">
+        <div class="relative hidden lg:block">
+          <input type="text" placeholder="Rechercher une transaction..." class="bg-bg-base border-none rounded-md pl-10 pr-4 py-2 text-sm w-80 focus:ring-2 focus:ring-primary/20">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 opacity-30">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </span>
+        </div>
+        <button class="bg-primary text-white px-6 py-2 rounded-md font-bold text-sm shadow-md hover:shadow-glow transition-all flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          Nouveau Transfert
+        </button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD GRID -->
+    <div class="p-8 space-y-8">
+      <!-- Top Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Wallet Card -->
+        <div class="lg:col-span-2 bg-white rounded-xl border border-border p-8 shadow-card overflow-hidden relative group">
+          <div class="relative z-10">
+            <div class="flex justify-between items-start mb-8">
+              <div>
+                <div class="text-text-secondary text-sm font-medium mb-1 uppercase tracking-wider">Solde Total Disponible</div>
+                <div class="text-5xl font-display font-bold text-text-primary">2,450.00 <span class="text-2xl opacity-40 font-normal">MAD</span></div>
+              </div>
+              
+              <!-- KYC Status Logic -->
+              <div *ngIf="!kycStatus" routerLink="/kyc" class="bg-warning/10 text-warning text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 cursor-pointer hover:bg-warning/20 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alert-circle"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                Vérification Requise
+              </div>
+
+              <div *ngIf="kycStatus?.status === 'PENDING'" class="bg-warning/10 text-warning text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Vérification en cours
+              </div>
+
+              <div *ngIf="kycStatus?.status === 'APPROVED'" class="bg-success/10 text-success text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>
+                Compte Vérifié
+              </div>
+
+              <div *ngIf="kycStatus?.status === 'REJECTED'" routerLink="/kyc" class="bg-danger/10 text-danger text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-circle"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
+                Refusé - Réessayer
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-8 items-end">
+              <div>
+                <div class="text-[10px] text-text-secondary uppercase mb-1 font-bold">Référence Wallet</div>
+                <div class="font-mono text-text-primary">MA-1234-5678-9012</div>
+              </div>
+              <div>
+                <div class="text-[10px] text-text-secondary uppercase mb-1 font-bold">Devise Principale</div>
+                <div class="font-bold text-text-primary">Dirham Marocain (MAD)</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Background Decor -->
+          <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
+          <div class="absolute bottom-0 right-20 w-32 h-32 bg-primary/5 rounded-full translate-y-1/2 group-hover:-translate-y-4 transition-transform duration-700"></div>
+        </div>
+
+        <!-- Quick Actions Bento -->
+        <div class="bg-white rounded-xl border border-border p-8 shadow-card flex flex-col justify-between">
+          <h2 class="text-lg font-bold mb-6">Actions Rapides</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <button class="flex flex-col items-center justify-center p-4 bg-bg-base rounded-lg hover:bg-primary-light transition-all group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-2 group-hover:scale-110 transition-transform"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span class="text-xs font-bold text-text-primary">Alimenter</span>
+            </button>
+            <button class="flex flex-col items-center justify-center p-4 bg-bg-base rounded-lg hover:bg-primary-light transition-all group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-2 group-hover:scale-110 transition-transform"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              <span class="text-xs font-bold text-text-primary">Transférer</span>
+            </button>
+            <button class="flex flex-col items-center justify-center p-4 bg-bg-base rounded-lg hover:bg-primary-light transition-all group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-2 group-hover:scale-110 transition-transform"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              <span class="text-xs font-bold text-text-primary">Mes Cartes</span>
+            </button>
+            <button class="flex flex-col items-center justify-center p-4 bg-bg-base rounded-lg hover:bg-primary-light transition-all group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-2 group-hover:scale-110 transition-transform"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-xs font-bold text-text-primary">Relevés</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Transactions -->
+      <div class="bg-white rounded-xl border border-border shadow-card overflow-hidden">
+        <div class="p-8 border-b border-border flex justify-between items-center">
+          <h2 class="text-xl font-bold">Transactions Récentes</h2>
+          <button class="text-primary text-sm font-bold hover:underline">Voir tout →</button>
+        </div>
+        
+        <div class="divide-y divide-border">
+          <!-- Tx 1 -->
+          <div class="p-6 flex items-center justify-between hover:bg-bg-base transition-all group cursor-pointer">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-danger/10 text-danger flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-right"><path d="m7 7 10 10"/><path d="M17 7v10H7"/></svg>
+              </div>
+              <div>
+                <div class="font-bold text-text-primary">Transfert à Fatima E.</div>
+                <div class="text-xs text-text-secondary">Aujourd'hui, 14:20 · P2P Transfer</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-bold text-danger text-lg">- 450.00 MAD</div>
+              <div class="text-[10px] text-success font-bold uppercase tracking-wider">Réussi</div>
+            </div>
+          </div>
+
+          <!-- Tx 2 -->
+          <div class="p-6 flex items-center justify-between hover:bg-bg-base transition-all group cursor-pointer">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-success/10 text-success flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-left"><path d="M7 17V7h10"/><path d="M17 17 7 7"/></svg>
+              </div>
+              <div>
+                <div class="font-bold text-text-primary">Dépôt Bancaire</div>
+                <div class="text-xs text-text-secondary">Hier, 09:45 · Top-up</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-bold text-success text-lg">+ 2,000.00 MAD</div>
+              <div class="text-[10px] text-success font-bold uppercase tracking-wider">Réussi</div>
+            </div>
+          </div>
+
+          <!-- Tx 3 -->
+          <div class="p-6 flex items-center justify-between hover:bg-bg-base transition-all group cursor-pointer">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-danger/10 text-danger flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              </div>
+              <div>
+                <div class="font-bold text-text-primary">Marjane Market</div>
+                <div class="text-xs text-text-secondary">20 Mars, 18:30 · Shopping</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-bold text-danger text-lg">- 324.50 MAD</div>
+              <div class="text-[10px] text-success font-bold uppercase tracking-wider">Réussi</div>
+            </div>
+          </div>
+
+          <!-- Tx 4 -->
+          <div class="p-6 flex items-center justify-between hover:bg-bg-base transition-all group cursor-pointer">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-danger/10 text-danger flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+              </div>
+              <div>
+                <div class="font-bold text-text-primary">Recharge IAM</div>
+                <div class="text-xs text-text-secondary">19 Mars, 11:05 · Services</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="font-bold text-danger text-lg">- 100.00 MAD</div>
+              <div class="text-[10px] text-success font-bold uppercase tracking-wider">Réussi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

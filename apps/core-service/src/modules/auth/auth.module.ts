@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 import { OtpService } from './otp/otp.service';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { JwtStrategy } from '@neobank/common';
 import { AuditModule } from '../audit/audit.module';
 
 @Module({
